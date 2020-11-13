@@ -9,8 +9,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SentenceParser extends AbstractParser {
-    public static final String REGEX_ALL_LEXEME = "([\\s.?!]\\w+|\\s|,|\\.|\\?)|(\\[(\\d+|\\s|\\+|\\*|-|\\\\)+])";
-    public static final String REGEX_EXPRESSION = "(\\[(\\d+|\\s|\\+|\\*|\\-|\\/)+])";
+
+    //public static final String EXPRESSION_REGEX = "(\\s*\\[(\\d+|\\s|\\+|\\*|\\-|\\/)+])";
+    public static final String WORD_REGEX = "([\\s*]*[A-zA-Z]+\\.*|\\?)";
+    public static final String ALL_LEXEMES_REGEX = "(\\s*\\[(\\d+|\\s|\\+|\\*|\\-|\\/)+])|([\\s*]*[A-zA-Z]+\\.*|\\?)";
 
     public SentenceParser(Parser successor) {
         super(null);
@@ -18,20 +20,26 @@ public class SentenceParser extends AbstractParser {
 
     @Override
     public Component parse(String textPart) {
+
         List<Component> lexemes = new ArrayList<>();
 
-        for (String lexeme : textPart.split(REGEX_ALL_LEXEME)) {
+        Pattern pattern = Pattern.compile(ALL_LEXEMES_REGEX);
+        Matcher matcher = pattern.matcher(textPart);
+
+        while (matcher.find()) {
+            String lexeme = matcher.group();
+
             if (checkLexeme(lexeme)) {
-                lexemes.add(LeafLexeme.expression(lexeme));
-            } else {
                 lexemes.add(LeafLexeme.word(lexeme));
+            } else {
+                lexemes.add(LeafLexeme.expression(lexeme));
             }
         }
         return new Composite(lexemes);
     }
 
     private boolean checkLexeme(String lexeme) {
-        Pattern pattern = Pattern.compile(REGEX_EXPRESSION);
+        Pattern pattern = Pattern.compile(WORD_REGEX);
         Matcher matcher = pattern.matcher(lexeme);
 
         return matcher.matches();

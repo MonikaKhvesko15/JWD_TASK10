@@ -1,17 +1,14 @@
 package com.epam.task10.interpreter;
 
-import com.epam.task10.exception.DataException;
 import com.epam.task10.exception.TerminalExpressionException;
-import com.epam.task10.reader.DataReader;
-import com.epam.task10.reader.Reader;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class MathInterpreterTest {
 
-    public static final String RESTORED_EXPRESSION = "6";
-    public static final String EXPRESSION = "1 2 * 10 + 2 /";
-    public static final String EXPRESSION_DIVIDE_BY_ZERO = "1 2 * 10 + 0 /";
+    private static final String RESTORED_EXPRESSION = "6";
+    private static final String EXPRESSION = "1 2 * 10 + 2 /";
+    private static final String EXPRESSION_DIVIDE_BY_ZERO = "1 2 * 10 + 0 /";
 
     @Test
     public void testMathInterpreterShouldReturnResolveExpression() throws TerminalExpressionException {

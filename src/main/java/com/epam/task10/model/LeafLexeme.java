@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class LeafLexeme implements Component {
 
-    private String value;
-    private LexemeType lexemeType;
+    private final String value;
+    private final LexemeType lexemeType;
 
     private LeafLexeme(String value, LexemeType lexemeType) {
         this.value = value;
@@ -47,6 +47,14 @@ public class LeafLexeme implements Component {
     @Override
     public int hashCode() {
         return Objects.hash(value, lexemeType);
+    }
+
+    @Override
+    public String toString() {
+        return "LeafLexeme{" +
+                "value='" + value + '\'' +
+                ", lexemeType=" + lexemeType +
+                '}';
     }
 }
 

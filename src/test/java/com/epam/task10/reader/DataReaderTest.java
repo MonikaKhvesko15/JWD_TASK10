@@ -6,8 +6,8 @@ import org.junit.Test;
 
 public class DataReaderTest {
 
-    public static final String CORRECT_INPUT_TXT = "src/test/resources/SourceTest.txt";
-    public static final String INVALID_TXT = "src/test/resources/Source.txt";
+    private static final String CORRECT_INPUT_TXT = "src/test/resources/SourceTest.txt";
+    private static final String INVALID_TXT = "src/test/resources/Source.txt";
 
     @Test
     public void testDataReaderShouldReturnDataStringWhenFileExists() throws DataException {

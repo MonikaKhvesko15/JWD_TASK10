@@ -27,4 +27,11 @@ public class Composite implements Component {
     public int hashCode() {
         return Objects.hash(components);
     }
+
+    @Override
+    public String toString() {
+        return "Composite{" +
+                "components=" + components +
+                '}';
+    }
 }
